@@ -1,5 +1,7 @@
 # Cybersecurity Awareness Bot — Part 1
 
+![Build Status](https://github.com/Sekgatla/CyberBot/actions/workflows/dotnet.yml/badge.svg)
+
 A C# console chatbot that educates South African citizens about online safety.
 
 ## Features
@@ -22,7 +24,7 @@ A C# console chatbot that educates South African citizens about online safety.
 ### Steps
 
 ```bash
-cd CyberBot
+dotnet restore CyberBot.csproj
 dotnet run
 ```
 
@@ -43,16 +45,8 @@ CyberBot/
 
 ## GitHub Actions (CI)
 
-The CI workflow is located at `.github/workflows/dotnet.yml`.  
+The CI workflow is at `.github/workflows/dotnet.yml`.  
 It builds and compiles the project on every push, verifying there are no syntax or build errors.
-
-### CI Status
-
-*(Add your GitHub Actions badge here after pushing to GitHub)*
-
-```
-![Build Status](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/dotnet.yml/badge.svg)
-```
 
 ## Cybersecurity Topics Supported
 
