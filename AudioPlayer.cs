@@ -1,62 +1,40 @@
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Media;
 
-namespace CyberBot
+namespace CyberSecurityChatbot
 {
     public class AudioPlayer
     {
-        private readonly string _filePath;
+        // Path to audio file
+        private readonly string _filePath = "greeting.wav";
 
-        public AudioPlayer(string filePath)
-        {
-            _filePath = filePath;
-        }
-
-        public void Play()
+        public void PlayGreeting()
         {
             try
             {
-                if (!File.Exists(_filePath))
+                // Check if file exists
+                if (File.Exists(_filePath))
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"  [Audio] greeting.wav not found at: {_filePath}");
-                    Console.ResetColor();
-                    return;
-                }
+                    // Create SoundPlayer with file path
+                    SoundPlayer player = new SoundPlayer(_filePath);
 
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    PlayOnWindows(_filePath);
+                    // Play audio and wait until finished
+                    player.PlaySync();
                 }
                 else
                 {
+                    // Display warning if file is missing
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("  [Audio] Voice greeting loaded. (Playback requires Windows.)");
+                    Console.WriteLine("Warning: greeting.wav not found.");
                     Console.ResetColor();
                 }
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"  [Audio] Could not play greeting: {ex.Message}");
-                Console.ResetColor();
+                // Handle any playback errors
+                Console.WriteLine("Error playing audio: " + ex.Message);
             }
-        }
-
-        private static void PlayOnWindows(string path)
-        {
-            var playerType = Type.GetType("System.Media.SoundPlayer, System.Windows.Extensions");
-            if (playerType == null)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("  [Audio] System.Media not available on this runtime.");
-                Console.ResetColor();
-                return;
-            }
-
-            using var player = (IDisposable)Activator.CreateInstance(playerType, path)!;
-            playerType.GetMethod("PlaySync")?.Invoke(player, null);
         }
     }
 }
