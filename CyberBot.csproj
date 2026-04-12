@@ -6,9 +6,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>CyberBot</AssemblyName>
-    <RootNamespace>CyberBot</RootNamespace>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <RootNamespace>CyberSecurityChatbot</RootNamespace>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Windows.Extensions" Version="8.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="greeting.wav">
