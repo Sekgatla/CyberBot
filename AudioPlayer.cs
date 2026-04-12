@@ -1,11 +1,18 @@
 using System;
 using System.IO;
-using System.Media;
+using System.Runtime.InteropServices;
 
 namespace CyberSecurityChatbot
 {
     public class AudioPlayer
     {
+        // Windows API for playing WAV files — no NuGet package needed
+        [DllImport("winmm.dll", SetLastError = true)]
+        private static extern bool PlaySound(string pszSound, IntPtr hmod, uint fdwSound);
+
+        private const uint SND_FILENAME = 0x00020000;
+        private const uint SND_SYNC = 0x00000000;
+
         // Path to audio file
         private readonly string _filePath = "greeting.wav";
 
@@ -16,11 +23,8 @@ namespace CyberSecurityChatbot
                 // Check if file exists
                 if (File.Exists(_filePath))
                 {
-                    // Create SoundPlayer with file path
-                    SoundPlayer player = new SoundPlayer(_filePath);
-
-                    // Play audio and wait until finished
-                    player.PlaySync();
+                    // Play WAV file using Windows built-in API (no packages required)
+                    PlaySound(_filePath, IntPtr.Zero, SND_FILENAME | SND_SYNC);
                 }
                 else
                 {
