@@ -19,7 +19,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore CyberBot/CyberBot.csproj
+        run: dotnet restore CyberBot.csproj
 
       - name: Build
-        run: dotnet build CyberBot/CyberBot.csproj --no-restore --configuration Release
+        run: dotnet build CyberBot.csproj --no-restore --configuration Release
