@@ -5,30 +5,19 @@ namespace CyberSecurityChatbot
 {
     public class Chatbot
     {
-        // Store current user
-        private User _user = new User();
+        private User? _user;
 
         public void Start()
         {
-            // Display ASCII art header
             DisplayHeader();
-
-            // Ask for user name
             GetUserName();
-
-            // Start chatbot interaction
             RunChat();
         }
 
         private void DisplayHeader()
         {
-            // Set console color
             Console.ForegroundColor = ConsoleColor.Green;
-
-            // Top border
             Console.WriteLine("====================================================");
-
-            // ASCII Art Title
             Console.WriteLine(@"
    ____            _               ____        _   
   / ___| _   _ ___| |_ ___ _ __   | __ )  ___ | |_ 
@@ -37,34 +26,23 @@ namespace CyberSecurityChatbot
   \____| \__, |___/\__\___|_|     |____/ \___/ \__|
          |___/                                    
 ");
-
-            // Title text
             Console.WriteLine("        CYBERSECURITY AWARENESS BOT");
-
-            // Bottom border
             Console.WriteLine("====================================================");
-
-            // Reset color
             Console.ResetColor();
         }
 
         private void GetUserName()
         {
-            // Prompt user for name
             Console.Write("\nEnter your name: ");
             string? input = Console.ReadLine();
 
-            // Validate input
             while (string.IsNullOrWhiteSpace(input))
             {
                 Console.Write("Name cannot be empty. Enter your name: ");
                 input = Console.ReadLine();
             }
 
-            // Store user
-            _user = new User { Name = input };
-
-            // Display welcome message
+            _user = new User { Name = input.Trim() };
             TypeEffect($"\nHello {_user.Name}! Welcome to the Cybersecurity Awareness Bot.\n");
         }
 
@@ -72,60 +50,74 @@ namespace CyberSecurityChatbot
         {
             while (true)
             {
-                // Prompt user
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("\nAsk a question (type 'exit' to quit): ");
                 Console.ResetColor();
 
                 string? input = Console.ReadLine()?.ToLower();
 
-                // Validate empty input
                 if (string.IsNullOrWhiteSpace(input))
                 {
                     Console.WriteLine("Please enter something.");
                     continue;
                 }
 
-                // Exit condition
                 if (input == "exit")
                 {
                     Console.WriteLine("Goodbye! Stay safe online.");
                     break;
                 }
 
-                // Process response
                 Respond(input);
             }
         }
 
         private void Respond(string input)
         {
-            // Respond to greeting
             if (input.Contains("how are you"))
             {
                 Console.WriteLine("I'm just a program, but I'm here to help you stay safe online!");
             }
-            // Respond to purpose
+            else if (input.Contains("what can i ask") || input.Contains("what can you do") || input.Contains("help") || input.Contains("topics"))
+            {
+                Console.WriteLine("You can ask me about passwords, phishing, safe browsing, malware, VPN security, two-factor authentication, identity theft, and public Wi-Fi safety.");
+            }
             else if (input.Contains("purpose"))
             {
-                Console.WriteLine("My purpose is to educate users about cybersecurity threats.");
+                Console.WriteLine("My purpose is to educate users about cybersecurity threats and help them stay safe online.");
             }
-            // Respond to password questions
             else if (input.Contains("password"))
             {
-                Console.WriteLine("Use strong passwords with uppercase, lowercase, numbers, and symbols.");
+                Console.WriteLine("Use strong passwords with at least 12 characters, including uppercase letters, lowercase letters, numbers, and symbols. Avoid personal information and never reuse passwords.");
             }
-            // Respond to phishing questions
             else if (input.Contains("phishing"))
             {
-                Console.WriteLine("Do not click suspicious links. Always verify the sender of emails.");
+                Console.WriteLine("Phishing is when attackers trick you with fake messages or websites. Never click suspicious links, and always verify the sender before sharing personal information.");
             }
-            // Respond to safe browsing
-            else if (input.Contains("safe browsing"))
+            else if (input.Contains("safe") && input.Contains("brows"))
             {
-                Console.WriteLine("Use secure websites (https) and avoid downloading unknown files.");
+                Console.WriteLine("For safe browsing, use HTTPS websites, avoid suspicious downloads, keep your browser updated, and close pages that ask for unnecessary personal information.");
             }
-            // Default response
+            else if (input.Contains("malware") || input.Contains("virus") || input.Contains("ransomware"))
+            {
+                Console.WriteLine("Malware is harmful software that can damage your device or steal information. Keep antivirus updated, avoid unknown attachments, and do not install untrusted apps.");
+            }
+            else if (input.Contains("vpn"))
+            {
+                Console.WriteLine("A VPN encrypts your internet connection, especially on public networks. Use a trusted VPN to help protect your privacy when browsing on Wi-Fi you do not control.");
+            }
+            else if (input.Contains("2fa") || input.Contains("two factor") || input.Contains("mfa"))
+            {
+                Console.WriteLine("Two-factor authentication adds a second layer of security to your account. Turn it on wherever possible so stolen passwords alone are not enough for attackers.");
+            }
+            else if (input.Contains("identity theft") || input.Contains("identity"))
+            {
+                Console.WriteLine("Identity theft happens when criminals use your personal details to impersonate you. Protect your ID number, banking details, and account logins, and monitor your accounts regularly.");
+            }
+            else if (input.Contains("wifi") || input.Contains("wi-fi") || input.Contains("public wi-fi") || input.Contains("public wifi"))
+            {
+                Console.WriteLine("Public Wi-Fi can be risky. Avoid banking or sensitive logins on open networks, and use a VPN if you must connect in public.");
+            }
             else
             {
                 Console.WriteLine("I didn't quite understand that. Could you rephrase?");
@@ -134,7 +126,6 @@ namespace CyberSecurityChatbot
 
         private void TypeEffect(string message)
         {
-            // Simulate typing animation
             foreach (char c in message)
             {
                 Console.Write(c);
