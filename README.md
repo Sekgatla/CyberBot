@@ -6,11 +6,11 @@ A C# console chatbot that educates South African citizens about online safety.
 
 ## Features
 
-- Voice greeting on startup (WAV file via `System.Media`)
+- Voice greeting on startup (WAV file via `System.Media.SoundPlayer`)
 - ASCII art banner and cybersecurity-themed logo
 - Personalised user interaction (asks for your name)
 - Colour-coded console UI with typing effect
-- Responses to cybersecurity topics: phishing, passwords, malware, VPNs, etc.
+- Responses to cybersecurity topics: passwords, phishing, safe browsing, malware, VPN, 2FA, identity theft, and public Wi-Fi
 - Input validation for empty or unrecognised queries
 - Clean class structure: `Program.cs`, `Chatbot.cs`, `User.cs`, `AudioPlayer.cs`
 
@@ -55,15 +55,14 @@ It builds and compiles the project on every push, verifying there are no syntax 
 | Password safety    | `password`                          |
 | Phishing           | `phishing`                          |
 | Safe browsing      | `browsing`, `safe browsing`         |
-| Social engineering | `social engineering`                |
-| Malware/Ransomware | `malware`, `virus`, `ransomware`    |
-| Identity theft     | `identity`, `identity theft`        |
-| Two-factor auth    | `2fa`, `two factor`, `mfa`          |
+| Malware            | `malware`, `virus`, `ransomware`    |
 | VPN                | `vpn`                               |
+| Two-factor auth    | `2fa`, `two factor`, `mfa`          |
+| Identity theft     | `identity`, `identity theft`        |
 | Public Wi-Fi       | `wifi`, `public wifi`               |
 | Bot purpose        | `purpose`, `what can you do`        |
 | Bot status         | `how are you`                       |
-| Help/Topics list   | `help`, `topics`                    |
+| Help/Topics list   | `what can i ask`, `help`, `topics`  |
 
 ## References
 
